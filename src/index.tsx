@@ -4,10 +4,10 @@ import { StrictMode } from 'react'
 import { Provider } from 'react-redux'
 
 // Local imports
-import App from './app/router'
-import reportWebVitals from './utils/web-vitals'
-import './styles/main.css'
-import { store } from './app/store'
+import App from '@/app/router'
+import reportWebVitals from '@/utils/web-vitals'
+import '@/styles/main.css'
+import { store } from '@/app/store'
 
 const htmlRoot = document.getElementById('root') as HTMLElement
 const reactRoot = ReactDOM.createRoot(htmlRoot)

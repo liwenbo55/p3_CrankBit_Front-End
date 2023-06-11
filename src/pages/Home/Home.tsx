@@ -22,6 +22,9 @@ const Home = () => {
             <Link to="/knowledge-base" className="font-bold">
               KnowledgePage
             </Link>
+            <Link to="/my-reports" className="font-bold">
+              My-report
+            </Link>
           </div>
         ) : (
           <div className="text-white">you logged in</div>

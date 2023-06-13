@@ -38,14 +38,6 @@ const router = createHashRouter([
     element: <KnowledgeBase />,
   },
   {
-    path: '/my-reports',
-    element: <MyReports />,
-  },
-  {
-    path: '/knowledge-base',
-    element: <KnowledgeBase />,
-  },
-  {
     path: '/account',
     element: (
       <PrivateRoute isLoggedIn={isLoggedIn}>

@@ -2,7 +2,7 @@ import { FC, useState } from 'react'
 import { AiOutlineAppstore, AiOutlineMenu } from 'react-icons/ai'
 import ListView from './components/ListView'
 import CardView from './components/CardView'
-import ToggleButton from '@/components/ToggleButton/ToggleButton'
+import ToggleButton from '@/components/ToggleButton'
 
 const ReportViewToggle: FC = () => {
   const [viewMode, SetViewMode] = useState<'list' | 'card'>('list')
@@ -19,6 +19,7 @@ const ReportViewToggle: FC = () => {
         ) : (
           <div />
         )}
+
         <div className="w-1/6 cursor-pointer text-end text-3xl">
           <ToggleButton
             icon={AiOutlineAppstore}

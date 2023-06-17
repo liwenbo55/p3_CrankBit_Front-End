@@ -13,6 +13,7 @@ import Profile from '@/pages/Profile'
 import LoginForCompany from '@/pages/Login/components/LoginForCompany/LoginForCompany'
 import CreateAccount from '@/pages/CreateAccount/CreateAccount'
 import ReportsHistory from '@/pages/MyReports/components/ReportsHistory'
+import Contact from '@/pages/Contact/Contact'
 
 const isLoggedIn = true
 
@@ -70,6 +71,10 @@ const router = createHashRouter([
   {
     path: '/my-reports/history',
     element: <ReportsHistory />,
+  },
+  {
+    path: '/contact',
+    element: <Contact />,
   },
 ])
 

@@ -2,6 +2,7 @@ import { FC } from 'react'
 import { createHashRouter, RouterProvider } from 'react-router-dom'
 import Home from '@/pages/Home'
 import SignUp from '@/pages/SignUp'
+import GetStarted from '@/pages/GetStarted'
 import Login from '@/pages/Login'
 import Report from '@/pages/Report'
 import MyReports from '@/pages/MyReports'
@@ -25,6 +26,10 @@ const router = createHashRouter([
   {
     path: '/auth/signup',
     element: <SignUp />,
+  },
+  {
+    path: '/auth/get-started',
+    element: <GetStarted />,
   },
   {
     path: '/auth/login',

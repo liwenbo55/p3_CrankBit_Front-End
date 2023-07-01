@@ -5,7 +5,7 @@ on:
   workflow_dispatch:
   push:
     branches: 
-    - CD-2-GithubAction_Frontend
+    - front-end_cd_pipeline
     - main
 
 env:

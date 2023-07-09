@@ -15,6 +15,7 @@ import MyProfile from '@/pages/MyProfile'
 import CreateAccount from '@/pages/CreateAccount'
 import MyReportsHistory from '@/pages/MyReportsHistory'
 import CreateReport from '@/pages/CreateReport'
+import UserLogin from '@/pages/UserLogin'
 
 import ResetPwdPage from '@/pages/Login/components/ResetPwdPage'
 
@@ -86,6 +87,10 @@ const router = createHashRouter([
   {
     path: '/report-s1',
     element: <ReportS1 />,
+  },
+  {
+    path: '/auth/user-login',
+    element: <UserLogin />,
   },
   {
     path: '/auth/login/reset-password',

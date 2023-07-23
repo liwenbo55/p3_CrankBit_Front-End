@@ -18,6 +18,7 @@ import ResetPassword from '@/pages/ResetPassword'
 import ForgotPassword from '@/pages/ForgotPassword'
 import AboutUs from '@/pages/AboutUs'
 import SetNewPassword from '@/pages/SetNewPassword/SetNewPassword'
+import MyCompanyReport from '@/pages/MyCompanyReport/MyCompanyReport'
 import MyCompany from '@/pages/MyCompany/MyCompany'
 
 const router = createHashRouter([
@@ -96,6 +97,10 @@ const router = createHashRouter([
   {
     path: '/about-us',
     element: <AboutUs />,
+  },
+  {
+    path: '/tenant/MyCompanyReport',
+    element: <MyCompanyReport />,
   },
 ])
 

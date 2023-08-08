@@ -13,7 +13,6 @@ const PrivateRoute: FC<Props> = ({ children }) => {
 
   useEffect(() => {
     const subdomain = getSubdomain()
-    console.log(subdomain)
     if (subdomain === process.env.REACT_APP_MAIN_HOST) {
       if (!user) {
         navigate('/auth/login')

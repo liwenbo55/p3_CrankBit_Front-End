@@ -3,7 +3,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import { MdLogout } from 'react-icons/md'
 import CompanyLayout from '@/layouts/UserLayout/UserLayout'
 import { useAppSelector, useAppDispatch } from '@/app/hooks'
-import { createCompany, getMyCompanies } from '@/services/company'
+import { createCompany, getMyCompanies, deleteCompanyByDomain } from '@/services/company'
 import { Company } from '@/interfaces/company'
 import Button, { Variant, Size } from '@/components/Button'
 import { logout } from '@/features/auth/authSlice'
@@ -44,6 +44,11 @@ const MyAccount: FC = () => {
     navigate('/')
   }
 
+  const handleDeleteCompany = async (domain: string): Promise<void> => {
+    await deleteCompanyByDomain(domain)
+    getCompanies()
+  }
+
   const getCompanyUrl = (domain: string): string => {
     const currentURL = new URL(window.location.href)
     const hostnameParts = currentURL.hostname.split('.')
@@ -80,7 +85,7 @@ const MyAccount: FC = () => {
           <div className="flex space-around bg-gray p-4">
             <input
               type="text"
-              className="w-[200px] h-[30px] rounded-lg shadow-mb"
+              className="w-[200px] h-[30px] rounded-lg shadow-mb pl-2"
               value={companyName}
               onChange={(e) => {
                 const regex = /^[a-zA-Z0-9-]*$/
@@ -103,12 +108,25 @@ const MyAccount: FC = () => {
           </div>
 
           <div className="flex gap-10 bg-white shadow-md rounded-lg p-20">
-            {companies.map((company) => (
-              <Link to={getCompanyUrl(company.domain)} key={company.domain}>
-                <img src="./svg/CompanyOne.png" alt="Company Logo" className="h-[100px] rounded-[100px]" />
-                <span>{company.domain}</span>
-              </Link>
-            ))}
+            {companies.length ? (
+              companies.map((company) => (
+                <div key={company.domain} className="flex-col w-[100px]">
+                  <Link to={getCompanyUrl(company.domain)}>
+                    <img src="./svg/CompanyOne.png" alt="Company Logo" className="h-[100px] rounded-[100px] block" />
+                    <span>{company.domain}</span>
+                  </Link>
+                  <button
+                    type="button"
+                    className="border-b text-xs text-orange-500 mt-10"
+                    onClick={() => handleDeleteCompany(company.domain)}
+                  >
+                    Delete Company
+                  </button>
+                </div>
+              ))
+            ) : (
+              <div>No Company Added</div>
+            )}
           </div>
 
           <Button

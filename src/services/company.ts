@@ -13,7 +13,19 @@ export const getMyCompanies = (): Promise<AxiosResponse> =>
     method: 'GET',
   })
 
-export const deleteCompanyById = (id: number): Promise<AxiosResponse> =>
-  api(`/company/${id}`, {
+export const deleteCompanyByDomain = (domain: string): Promise<AxiosResponse> =>
+  api(`/company/${domain}`, {
     method: 'DELETE',
   })
+
+// uncomment below 2 functions will cause Axios error
+
+// export const deleteCompanyById = (id: string): Promise<AxiosResponse> =>
+//   api(`/company/${id}`, {
+//     method: 'DELETE'
+//   })
+
+// export const getCompanyIdByDomain = (domain: string): Promise<AxiosResponse> =>
+//   api(`/company/${domain}`, {
+//     method: 'GET'
+//   })

@@ -1,4 +1,4 @@
-import { FC, useEffect,useState} from 'react'
+import { FC, useEffect, useState } from 'react'
 import { createHashRouter, RouterProvider } from 'react-router-dom'
 import Home from '@/pages/Home'
 import GetStarted from '@/pages/GetStarted'

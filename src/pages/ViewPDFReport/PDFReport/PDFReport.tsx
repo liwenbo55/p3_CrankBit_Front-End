@@ -3,7 +3,16 @@ import { Document, Image, Page, Text, View } from '@react-pdf/renderer'
 import styles from './PDFStyles'
 import mockData from './assets/mockData'
 
-const PDFReport: FC = () => (
+interface Props {
+  Year: string
+  Make: string
+  Model: string
+  Rego: string
+  Odometer: string
+  CustomerName: string
+  service: string[]
+}
+const PDFReport: FC<Props> = ({ Year, Model, Odometer, Rego, Make, CustomerName, service }) => (
   <Document>
     <Page size="A4" style={styles.page}>
       <View style={styles.header}>
@@ -15,14 +24,12 @@ const PDFReport: FC = () => (
           <Text style={styles.h2}>{mockData.Company.Domain}</Text>
         </View>
         <View>
-          <Text style={styles.h4}>{mockData.Report.title}</Text>
-          <Text style={styles.subtitle2}>Status: {mockData.Report.status}</Text>
+          <Text style={styles.h4}>Service Report</Text>
         </View>
       </View>
       <View style={styles.tenant}>
         <View style={styles.textBoxWidth}>
           <Text style={[styles.h6, styles.gutterBottom]}>{mockData.Tenant.name}</Text>
-          <Text style={styles.subtitle2}>{mockData.Tenant.email}</Text>
         </View>
         <View style={styles.flexRow}>
           <View style={styles.flexRowWidth}>
@@ -30,21 +37,17 @@ const PDFReport: FC = () => (
             <Text style={styles.body2}>Vehicle:</Text>
             <Text style={styles.body2}>Rego:</Text>
             <Text style={styles.body2}>Odometer:</Text>
+            <Text style={styles.body2}>Name:</Text>
           </View>
           <View>
             {' '}
             <Text style={styles.body2}>
-              {mockData.Vehicle.make} {mockData.Vehicle.make} {mockData.Vehicle.year}
+              {Make} {Model} {Year}
             </Text>
-            <Text style={styles.body2}>{mockData.Vehicle.rego}</Text>
-            <Text style={styles.body2}>{mockData.Vehicle.odo}</Text>
+            <Text style={styles.body2}>{Rego}</Text>
+            <Text style={styles.body2}>{Odometer}</Text>
+            <Text style={styles.body2}>{CustomerName}</Text>
           </View>
-        </View>
-      </View>
-      <View style={styles.user}>
-        <View>
-          <Text style={[styles.subtitle2, styles.gutterBottom]}>Created At</Text>
-          <Text style={[styles.body2]}>{mockData.Report.createdAt}</Text>
         </View>
       </View>
       <View style={styles.items}>
@@ -60,7 +63,7 @@ const PDFReport: FC = () => (
             </View>
           </View>
           <View style={styles.tableBody}>
-            {mockData.Report.service.map((item, index) => (
+            {service.map((item, index) => (
               <View style={styles.tableRow} key="">
                 <View style={[styles.tableCell, styles.serviceItemWidth]}>
                   <Text style={styles.body3}>{item}</Text>

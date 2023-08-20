@@ -1,4 +1,5 @@
-import { FC, useEffect, useState } from 'react'
+/* eslint-disable @typescript-eslint/no-unnecessary-condition */
+import { FC, useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { MdKeyboardDoubleArrowLeft, MdLogout } from 'react-icons/md'
 import CompanyLayout from '@/layouts/UserLayout/UserLayout'
@@ -63,15 +64,15 @@ const MyUsers: FC = () => {
   return (
     <CompanyLayout>
       <div className="bg-userContent min-h-screen p-10 ">
-        <h1 className="mb-5 text-2xl font-extrabold">Hi {user.tenant.name},</h1>
-        <div className="bg-[#FFFFFF] rounded-lg p-10 w-[809px] h-[130px]">
+        <h1 className="mb-4">Hi {user.tenant?.name},</h1>
+        <div className="bg-white rounded-lg p-10">
           <div>
             <p className="inline-block">Name:</p>
-            <p className="inline-block ml-20 text-darkGray">{user.tenant.name}</p>
+            <p className="inline-block ml-20">{user.tenant?.name}</p>
           </div>
           <div>
-            <p className="inline-block mt-5">Email:</p>
-            <p className="inline-block ml-20 text-darkGray">{user.tenant.email}</p>
+            <p className="inline-block">Email:</p>
+            <p className="inline-block ml-20">{user.tenant?.email}</p>
           </div>
         </div>
         <div className="mt-10 w-[808px] h-[72px] rounded-t-lg rounded-tr-lg">

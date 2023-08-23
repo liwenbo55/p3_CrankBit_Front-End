@@ -10,6 +10,7 @@ import HelpSupport from '@/pages/HelpSupport'
 import PrivateRoute from '@/routes/PrivateRoute'
 import PublicRoute from '@/routes/PublicRouter'
 import PublicLoginRoute from '@/routes/PublicLoginRoute'
+import UrlRoute from '@/routes/UrlRoute/UrlRoute'
 import MyUsers from '@/pages/MyUsers'
 import MyAccount from '@/pages/MyAccount'
 import MyProfile from '@/pages/MyProfile'
@@ -26,7 +27,6 @@ import MyProfileTenant from '@/pages/MyProfileTenant'
 import NotFound from '@/pages/NotFound'
 import getSubdomain from '@/utils/subdomain'
 import checkSubDomain from '@/services/public'
-import ViewPDFReport from '@/pages/ViewPDFReport/ViewPDFReport'
 
 const router = createHashRouter([
   {
@@ -78,10 +78,6 @@ const router = createHashRouter([
     element: <MyUsers />,
   },
   {
-    path: '/my-users/https://www.crankbit.com/#/account',
-    element: <MyUsers />,
-  },
-  {
     path: '/account',
     element: (
       <PrivateRoute>
@@ -128,6 +124,10 @@ const router = createHashRouter([
   {
     path: '/NotFound',
     element: <NotFound />,
+  },
+  {
+    path: '*',
+    element: <UrlRoute />,
   },
 ])
 

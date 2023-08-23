@@ -35,20 +35,7 @@ const MyUsers: FC = () => {
   }
 
   useEffect(() => {
-    // hack: if url end with /https://www.crankbit.com/#/account, redirect to /my-users
-    let currentURL = new URL(window.location.href)
-    if (currentURL.pathname.endsWith('/https://www.crankbit.com/#/account')) {
-      currentURL = new URL(window.location.href)
-      const hostnameParts = currentURL.hostname.split('.')
-      if (hostnameParts.length > 2) {
-        hostnameParts[0] = process.env.REACT_APP_MAIN_HOST || 'www'
-      }
-      currentURL.hostname = hostnameParts.join('.')
-      currentURL.pathname = ''
-      currentURL.search = ''
-      currentURL.hash = `/my-users`
-      navigate(currentURL.toString())
-    } else if (!user) {
+    if (!user) {
       navigate(getAccountUrl())
     } else {
       getUsers()

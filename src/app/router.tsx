@@ -78,6 +78,10 @@ const router = createHashRouter([
     element: <MyUsers />,
   },
   {
+    path: '/my-users/https://www.crankbit.com/#/account',
+    element: <MyUsers />,
+  },
+  {
     path: '/account',
     element: (
       <PrivateRoute>

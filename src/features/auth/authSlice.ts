@@ -1,7 +1,7 @@
 import { AxiosError } from 'axios'
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import { RootState } from '@/app/store'
-import { loginApi, registerApi } from '@/services/user'
+import { loginApi, registerApi } from '@/services/tenant'
 import { getUserFromLocalStorage, addUserToLocalStorage, removeUserFromLocalStorage } from '@/utils/localStorage'
 import { User, RegisterPayload, LoginPayload, AuthState } from '@/interfaces/auth'
 
@@ -20,7 +20,7 @@ export const registerUser = createAsyncThunk<User, RegisterPayload, { rejectValu
       return data
     } catch (err) {
       if (err instanceof AxiosError) {
-        return rejectWithValue(err)
+        return rejectWithValue(err.response?.data ?? err)
       }
       throw err
     }
@@ -36,7 +36,7 @@ export const loginUser = createAsyncThunk<User, LoginPayload, { rejectValue: Axi
       return data
     } catch (err) {
       if (err instanceof AxiosError) {
-        return rejectWithValue(err)
+        return rejectWithValue(err.response?.data ?? err)
       }
       throw err
     }
@@ -61,9 +61,10 @@ export const authSlice = createSlice({
         state.isLoading = false
         state.user = payload
       })
-      .addCase(registerUser.rejected, (state) => {
+      .addCase(registerUser.rejected, (state, { payload }) => {
         state.isLoading = false
         state.isError = true
+        state.error = payload
       })
       .addCase(loginUser.pending, (state) => {
         state.isLoading = true
@@ -72,9 +73,10 @@ export const authSlice = createSlice({
         state.isLoading = false
         state.user = payload
       })
-      .addCase(loginUser.rejected, (state) => {
+      .addCase(loginUser.rejected, (state, { payload }) => {
         state.isLoading = false
         state.isError = true
+        state.error = payload
       })
   },
 })

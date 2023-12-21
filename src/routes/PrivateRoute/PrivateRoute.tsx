@@ -1,23 +1,32 @@
-import { FC, ReactElement, ReactNode } from 'react'
-import { Navigate } from 'react-router-dom'
-import Login from '@/pages/Login'
+import { FC, useEffect, ReactElement } from 'react'
+import { useNavigate } from 'react-router-dom'
+import { useAppSelector } from '@/app/hooks'
+import getSubdomain from '@/utils/subdomain'
 
-interface PrivateRouteProps {
-  isLoggedIn: boolean
-  children: ReactNode
+interface Props {
+  children: ReactElement
 }
 
-const PrivateRoute: FC<PrivateRouteProps> = ({ isLoggedIn, children }) => {
-  const auth = isLoggedIn
+const PrivateRoute: FC<Props> = ({ children }) => {
+  const navigate = useNavigate()
+  const { user, isLoading } = useAppSelector((state) => state.auth)
 
-  return auth ? (
-    (children as ReactElement)
-  ) : (
-    <>
-      <Login />
-      <Navigate to="/" />
-    </>
-  )
+  useEffect(() => {
+    const subdomain = getSubdomain()
+    if (subdomain === process.env.REACT_APP_MAIN_HOST) {
+      if (!user) {
+        navigate('/auth/login')
+      }
+    } else {
+      navigate('/')
+    }
+  }, [user, navigate])
+
+  if (isLoading) {
+    return <>Loading...</>
+  }
+
+  return children
 }
 
 export default PrivateRoute

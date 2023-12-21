@@ -1,5 +1,7 @@
+import { AxiosError } from 'axios'
+
 export interface User {
-  user: {
+  tenant: {
     userId: string
     name: string
     email: string
@@ -22,4 +24,5 @@ export interface AuthState {
   isLoading: boolean
   user: User | null
   isError: boolean
+  error?: AxiosError | Error
 }

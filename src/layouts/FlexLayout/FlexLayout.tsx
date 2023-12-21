@@ -3,6 +3,7 @@ import classNames from 'classnames'
 import Container from '@/layouts/Container'
 import FileLogo from '@/components/FileLogo'
 import SideNavigation from '@/components/SideNavigation'
+import SideNavigationReportBuilder from '@/components/SideNavigationReportBuilder'
 
 interface Props {
   children: ReactNode
@@ -12,6 +13,8 @@ interface Props {
 export enum PageVariant {
   AuthPage,
   UserPage,
+  CompanyPage,
+  ReportBuilderPage,
 }
 
 const FlexLayout: FC<Props> = ({ children, variant }) => (
@@ -20,20 +23,31 @@ const FlexLayout: FC<Props> = ({ children, variant }) => (
       className={classNames(
         'bg-background',
         'text-white',
-        variant === PageVariant.AuthPage && ['w-1/2'],
+        variant === PageVariant.AuthPage && ['w-1/2 flex items-center justify-center'],
         variant === PageVariant.UserPage && ['w-[305px]']
       )}
     >
-      {variant === PageVariant.AuthPage && (
-        <div className="px-64 py-80 text-center">
-          <FileLogo className="w-20 h-24">
-            <div className="text-xl">Form Builder</div>
-          </FileLogo>
-        </div>
-      )}
+      {variant === PageVariant.AuthPage && <FileLogo className="h-[100px]" />}
       {variant === PageVariant.UserPage && <SideNavigation />}
+      {variant === PageVariant.CompanyPage && <SideNavigation isCompanySide />}
+      {variant === PageVariant.ReportBuilderPage && <SideNavigationReportBuilder isCompanySide />}
     </div>
-    <div className="flex-grow flex">{children}</div>
+
+    <div
+      className={classNames(
+        variant === PageVariant.AuthPage && ['w-1/2'],
+        variant === PageVariant.UserPage && ['w-full'],
+        variant === PageVariant.CompanyPage && ['w-full'],
+        variant === PageVariant.ReportBuilderPage && ['w-full']
+      )}
+    >
+      {variant === PageVariant.UserPage && children}
+      {variant === PageVariant.CompanyPage && children}
+      {variant === PageVariant.ReportBuilderPage && children}
+      {variant === PageVariant.AuthPage && (
+        <div className="flex items-center justify-center bg-white h-screen">{children}</div>
+      )}
+    </div>
   </Container>
 )
 
